@@ -46,8 +46,9 @@
 
 /* Mobile grande */
 @media (max-width: 640px) {
-  .devicon-github-original {
-    font-size: var(--font-2xl);
+  .github-icon {
+    width: 40px;
+    height: 40px;
   }
   
   .container .profile-data .counters span {
