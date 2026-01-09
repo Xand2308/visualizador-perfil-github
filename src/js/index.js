@@ -1,4 +1,4 @@
-import { fetchGitHubUser, fetchGithubUserRepos } from './githubApi.js';
+import { fetchGitHubUser, fetchGitHubUserRepos } from './githubApi.js';
 import { renderProfile } from './profileView.js';
 
 const inputSearch = document.getElementById('input-search');
@@ -19,7 +19,7 @@ btnSearch.addEventListener('click', async () => {
 
     try {
         const userData = await fetchGitHubUser(username);
-        const userRepos = await fetchGithubUserRepos(username);
+        const userRepos = await fetchGitHubUserRepos(username);
 
         renderProfile(userData, userRepos, profileResults);
     } catch (error) {
