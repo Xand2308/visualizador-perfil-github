@@ -1,7 +1,16 @@
-# visualizador-perfil-github
+# Visualizador de Perfil do GitHub
 
-Endpoints que vamos usar 
+## Descrição
 
-Perfil: GET /users/:username
+Este é um projeto simples que permite visualizar o perfil de um usuário do GitHub, incluindo seus repositórios mais recentes.
 
-Repositórios: GET /users/: username (usar query per_page=10 e sort=updated / sort=pushed conforme objetivo)
+## Como usar
+
+1.  Abra o arquivo `index.html` em seu navegador.
+2.  Digite o nome de um usuário do GitHub na caixa de pesquisa.
+3.  Clique no botão "Buscar".
+
+## Endpoints da API do GitHub
+
+*   **Perfil:** `GET /users/:username`
+*   **Repositórios:** `GET /users/:username/repos?per_page=10&sort=created`

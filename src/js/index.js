@@ -1,30 +1,31 @@
-import { fetchGithubUser, fetchGithubUserRepos } from `./githubapi.js`;
+import { fetchGitHubUser, fetchGithubUserRepos } from './githubApi.js';
 import { renderProfile } from './profileView.js';
 
-const inputSerach = document.getElementById('input-search');
+const inputSearch = document.getElementById('input-search');
 const btnSearch = document.getElementById('btn-search');
-const proFileResults = document.querySelector('.profile-results');
+const profileResults = document.querySelector('.profile-results');
+const loading = document.getElementById('loading');
 
 btnSearch.addEventListener('click', async () => {
-    const username = inputSerach.value;
-    if (username) {
-        alert("Por Favor, Digite um Nome de Usuário do GitHub.");
-        proFileResults.innerHTML = '';
+    const username = inputSearch.value;
+    if (!username) {
+        alert("Por favor, digite um nome de usuário do GitHub.");
+        profileResults.innerHTML = '';
         return;
     }
 
-    proFileResults.innerHTML = '<p class="loading">Carregando...</p>';
+    loading.classList.add('active');
+    profileResults.innerHTML = '';
+
     try {
         const userData = await fetchGitHubUser(username);
         const userRepos = await fetchGithubUserRepos(username);
 
-        console.log(userRepos);
-
-        renderProfile(userData, userRepos, proFileResults);
+        renderProfile(userData, userRepos, profileResults);
     } catch (error) {
-        console.error('Erro ao Buscar o Perfil do Usuário:', error);
-        alert('Usuario não encontrado.Por Favor, Verefique o Nome de Usuário e Tente Novamente');
-
-        proFileResults.innerHTML = '';
+        console.error('Erro ao buscar o perfil do usuário:', error);
+        profileResults.innerHTML = '<p>Usuário não encontrado. Por favor, verifique o nome de usuário e tente novamente.</p>';
+    } finally {
+        loading.classList.remove('active');
     }
-});    
+});

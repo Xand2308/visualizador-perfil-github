@@ -212,46 +212,72 @@ main {
   justify-content: center;
 }
 
+.loading-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loading-container.active {
+    display: flex;
+}
+
+.loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
 .repository-card{
-  background: #989797;
-  border: 1px solid var(--radius);
-  box-shadow: var(--radius);
-  padding: 1. rem 1rem;
-  min-width: 250px;
-  max-width: 300px;
-  flex: 1 1 250px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  transition: box-shadow 0,2s;
-
+    background: #fdfdfd;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    padding: 1.5rem;
+    min-width: 250px;
+    max-width: 320px;
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: box-shadow 0.2s;
+    border-radius: var(--radius);
 }
 
-.repository-card-hover {
-  box-shadow: (var(--shadow-md));
+.repository-card:hover {
+    box-shadow: var(--shadow-md);
 }
 
-.repository-card- h3 {
-  font-size: var(--font-md);
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--primary);
-  text-align: left;
+.repository-card h3 {
+    font-size: var(--font-md);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary);
+    text-align: left;
 }
 
 .repository-stats {
-display: flex;
-flex-direction: column;
-gap: 0,5rem;
-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
 }
 
-.respositoy-stats span{
-  font-size: var(--font-sm);
-  color: var(--muted-foreground);
-  background: #667eea;
-  border-radius: 0,25rem;
-  padding: 0,25rem 0,5rem;
-  margin-bottom: 0,25rem;
-  text-align: left;
+.repository-stats span{
+    font-size: var(--font-sm);
+    color: var(--muted-foreground);
+    background: var(--muted);
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 0.25rem;
+    text-align: left;
 }
