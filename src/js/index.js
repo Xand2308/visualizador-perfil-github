@@ -1,36 +1,30 @@
-import { getSearchButton, getSearchInputValue, showLoading, hideLoading, renderProfile } from './ui.js';
-import { getUserProfile, validateUserName } from './profile.js';
+import { fetchGithubUser, fetchGithubUserRepos } from `./githubapi.js`;
+import { renderProfile } from './profileView.js';
 
-/**
- * Inicializa os event listeners da aplicação
- */
-const initEventListeners = () => {
-    const btnSearch = getSearchButton();
-    btnSearch.addEventListener('click', handleSearch);
-};
+const inputSerach = document.getElementById('input-search');
+const btnSearch = document.getElementById('btn-search');
+const proFileResults = document.querySelector('.profile-results');
 
-/**
- * Gerencia a busca de perfil do usuário
- */
-const handleSearch = async () => {
-    const userName = getSearchInputValue();
-
-    if (!validateUserName(userName)) {
-        alert('Por favor, digite um nome de usuário do GitHub.');
+btnSearch.addEventListener('click', async () => {
+    const username = inputSerach.value;
+    if (username) {
+        alert("Por Favor, Digite um Nome de Usuário do GitHub.");
+        proFileResults.innerHTML = '';
         return;
     }
 
-    showLoading();
-
+    proFileResults.innerHTML = '<p class="loading">Carregando...</p>';
     try {
-        const userData = await getUserProfile(userName);
-        renderProfile(userData);
-    } catch (error) {
-        alert('Usuário não encontrado. Por favor, verifique o nome do usuário e tente novamente.');
-    } finally {
-        hideLoading();
-    }
-};
+        const userData = await fetchGitHubUser(username);
+        const userRepos = await fetchGithubUserRepos(username);
 
-// Inicializa a aplicação quando o DOM estiver pronto
-initEventListeners();
+        console.log(userRepos);
+
+        renderProfile(userData, userRepos, proFileResults);
+    } catch (error) {
+        console.error('Erro ao Buscar o Perfil do Usuário:', error);
+        alert('Usuario não encontrado.Por Favor, Verefique o Nome de Usuário e Tente Novamente');
+
+        proFileResults.innerHTML = '';
+    }
+});    
