@@ -239,7 +239,6 @@ main {
 }
 
 .repository-card{
-    background: #fdfdfd;
     border: 1px solid var(--border);
     box-shadow: var(--shadow-sm);
     padding: 1.5rem;
